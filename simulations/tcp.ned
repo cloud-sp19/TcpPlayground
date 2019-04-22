@@ -29,7 +29,9 @@ network Tcp
     	endpoint : StandardHost;
     	router : Router;
     	user : StandardHost;
-    	configurator : Ipv4NetworkConfigurator;
+    	configurator : Ipv4NetworkConfigurator {
+    		config = default(xml("<config><interface hosts='**' address='10.x.x.x' netmask='255.x.x.x'/></config>"));   
+    	}
     connections allowunconnected:
         endpoint.ethg++ <--> Eth10G <--> router.ethg++;
         user.ethg++ <--> Eth10G <--> router.ethg++;
