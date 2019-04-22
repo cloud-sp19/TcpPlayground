@@ -15,7 +15,7 @@
 
 package tcp.simulations;
 import inet.node.inet.StandardHost;
-import inet.node.inet.Router;
+import inet.linklayer.ethernet.EtherHub;
 import inet.node.ethernet.Eth10G;
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
 
@@ -27,12 +27,12 @@ network Tcp
 {
     submodules:
     	endpoint : StandardHost;
-    	router : Router;
+    	switch : EtherHub;
     	user : StandardHost;
     	configurator : Ipv4NetworkConfigurator {
     		config = default(xml("<config><interface hosts='**' address='10.x.x.x' netmask='255.x.x.x'/></config>"));   
     	}
     connections allowunconnected:
-        endpoint.ethg++ <--> Eth10G <--> router.ethg++;
-        user.ethg++ <--> Eth10G <--> router.ethg++;
+        endpoint.ethg++ <--> Eth10G <--> switch.ethg++;
+        user.ethg++ <--> Eth10G <--> switch.ethg++;
 }
